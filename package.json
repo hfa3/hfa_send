@@ -30,7 +30,7 @@
     "test:report": "nyc report --reporter=html",
     "test-integration": "cross-env NODE_ENV=development wdio test/wdio.docker.conf.js",
     "circleci-test-integration": "echo 'webdriverio tests need to be updated to node 12'",
-    "start": "npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack-dev-server --mode=development",
+    "start": "npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack serve --mode=development",
     "android": "cross-env ANDROID=1 npm start",
     "prod": "node server/bin/prod.js"
   },
@@ -123,10 +123,10 @@
     "svgo-loader": "^3.0.1",
     "tailwindcss": "^2",
     "val-loader": "^2.1.2",
-    "webpack": "4.38.0",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^4.47.0",
+    "webpack-cli": "^4.10.0",
     "webpack-dev-middleware": "^3.7.3",
-    "webpack-dev-server": "^3.11.3",
+    "webpack-dev-server": "^4.15.2",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-unassert-loader": "^1.2.0"
   },
