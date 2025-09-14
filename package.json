@@ -125,7 +125,7 @@
     "val-loader": "^2.1.2",
     "webpack": "^4.47.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-middleware": "^3.7.3",
+    "webpack-dev-middleware": "^5.3.4",
     "webpack-dev-server": "^4.15.2",
     "webpack-manifest-plugin": "^2.2.0",
     "webpack-unassert-loader": "^1.2.0"
@@ -152,6 +152,15 @@
     "redis-mock": "^0.47.0",
     "selenium-standalone": "^6.24.0",
     "ua-parser-js": "^0.7.31"
+  },
+  "overrides": {
+    "webpack-dev-middleware": "^5.3.4",
+    "follow-redirects": "^1.15.11",
+    "shell-quote": "^1.8.3",
+    "micromatch": "^4.0.8",
+    "braces": "^3.0.3",
+    "dns-packet": "^5.6.1",
+    "selfsigned": "^2.4.1"
   },
   "availableLanguages": [
     "en-US",
