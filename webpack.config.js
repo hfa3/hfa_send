@@ -252,6 +252,11 @@ const web = {
       require('./server/bin/dev')(devServer.app, devServer);
       return middlewares;
     },
+    devMiddleware: {
+      // keep existing options you have here
+      writeToDisk: (filePath) =>
+        /(?:^|\/)(manifest\.json|version\.json)$/.test(filePath),
+    },
   },
 };
 
