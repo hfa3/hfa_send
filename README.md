@@ -10,6 +10,9 @@ export UI_CUSTOM_ASSETS_ICON="hfa_icon.svg"
 export UI_CUSTOM_ASSETS_WORDMARK="hfa_wordmark.svg"
 ```
 
+Notes:
+- This seems to run fine on Node 20 even though it specs Node 16
+
 ---
 
 [docker-image-badge]: https://img.shields.io/badge/docker-latest-blue.svg
