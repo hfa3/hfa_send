@@ -2,8 +2,7 @@ const html = require('choo/html');
 const assets = require('../../common/assets');
 const modal = require('./modal');
 
-module.exports = function(state, emit) {
-  const btnText = state.user.loggedIn ? 'okButton' : 'sendYourFilesLink';
+module.exports = function (state, emit) {
   return html`
     <main class="main">
       ${state.modal && modal(state, emit)}
@@ -16,19 +15,6 @@ module.exports = function(state, emit) {
         <svg class="text-primary my-12">
           <use xlink:href="${assets.get('notFound.svg')}#svg124" />
         </svg>
-        <p
-          class="max-w-md text-center text-grey-80 leading-normal dark:text-grey-40 ${state
-            .user.loggedIn
-            ? 'hidden'
-            : ''}"
-        >
-          ${state.translate('trySendDescription')}
-        </p>
-        <p class="my-5">
-          <a href="/" class="btn rounded-lg flex items-center" role="button"
-            >${state.translate(btnText)}</a
-          >
-        </p>
       </section>
     </main>
   `;

@@ -16,54 +16,13 @@ class Footer extends Component {
 
     // Add additional links from configuration if available
     var links = [];
-    if (this.state != undefined && this.state.WEB_UI != undefined) {
-      const WEB_UI = this.state.WEB_UI;
-
-      if (WEB_UI.FOOTER_DONATE_URL != '') {
-        links.push(html`
-          <li class="m-2">
-            <a href="${WEB_UI.FOOTER_DONATE_URL}" target="_blank">
-              ${translate('footerLinkDonate')}
-            </a>
-          </li>
-        `);
-      }
-      if (WEB_UI.FOOTER_CLI_URL != '') {
-        links.push(html`
-          <li class="m-2">
-            <a href="${WEB_UI.FOOTER_CLI_URL}" target="_blank">
-              ${translate('footerLinkCli')}
-            </a>
-          </li>
-        `);
-      }
-      if (WEB_UI.FOOTER_DMCA_URL != '') {
-        links.push(html`
-          <li class="m-2">
-            <a href="${WEB_UI.FOOTER_DMCA_URL}" target="_blank">
-              ${translate('footerLinkDmca')}
-            </a>
-          </li>
-        `);
-      }
-      if (WEB_UI.FOOTER_SOURCE_URL != '') {
-        links.push(html`
-          <li class="m-2">
-            <a href="${WEB_UI.FOOTER_SOURCE_URL}" target="_blank">
-              ${translate('footerLinkSource')}
-            </a>
-          </li>
-        `);
-      }
-    } else {
-      links.push(html`
-        <li class="m-2">
-          <a href="https://gitlab.com/timvisee/send" target="_blank">
-            ${translate('footerLinkSource')}
-          </a>
-        </li>
-      `);
-    }
+    links.push(html`
+      <li class="m-2">
+        <a href="https://gitlab.com/timvisee/send" target="_blank">
+          ${translate('footerLinkSource')}
+        </a>
+      </li>
+    `);
 
     // Defining a custom footer
     var footer = [];
@@ -78,8 +37,7 @@ class Footer extends Component {
             </a>
           </li>
         `);
-      }
-      else if (WEB_UI.CUSTOM_FOOTER_URL != '') {
+      } else if (WEB_UI.CUSTOM_FOOTER_URL != '') {
         footer.push(html`
           <li class="m-2">
             <a href="${WEB_UI.CUSTOM_FOOTER_URL}" target="_blank">
@@ -87,20 +45,10 @@ class Footer extends Component {
             </a>
           </li>
         `);
-      }
-      else if (WEB_UI.CUSTOM_FOOTER_TEXT != '') {
-        footer.push(html`
-          <li class="m-2">
-            ${WEB_UI.CUSTOM_FOOTER_TEXT}
-          </li>
-        `)
-      }
-      else  {
-        footer.push(html`
-          <li class="m-2">
-            ${translate('footerText')}
-          </li>
-        `);
+      } else if (WEB_UI.CUSTOM_FOOTER_TEXT != '') {
+        footer.push(html` <li class="m-2">${WEB_UI.CUSTOM_FOOTER_TEXT}</li> `);
+      } else {
+        footer.push(html` <li class="m-2">${translate('footerText')}</li> `);
       }
     }
 

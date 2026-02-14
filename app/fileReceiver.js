@@ -1,7 +1,7 @@
 import Nanobus from 'nanobus';
 import Keychain from './keychain';
 import { delay, bytes, streamToArrayBuffer } from './utils';
-import { downloadFile, metadata, getApiUrl, reportLink } from './api';
+import { downloadFile, metadata, getApiUrl } from './api';
 import { blobStream } from './streams';
 import Zip from './zip';
 
@@ -27,7 +27,7 @@ export default class FileReceiver extends Nanobus {
   get sizes() {
     return {
       partialSize: bytes(this.progress[0]),
-      totalSize: bytes(this.progress[1])
+      totalSize: bytes(this.progress[1]),
     };
   }
 
@@ -53,15 +53,11 @@ export default class FileReceiver extends Nanobus {
     this.state = 'ready';
   }
 
-  async reportLink(reason) {
-    await reportLink(this.fileInfo.id, this.keychain, reason);
-  }
-
   sendMessageToSw(msg) {
     return new Promise((resolve, reject) => {
       const channel = new MessageChannel();
 
-      channel.port1.onmessage = function(event) {
+      channel.port1.onmessage = function (event) {
         if (event.data === undefined) {
           reject('bad response from serviceWorker');
         } else if (event.data.error !== undefined) {
@@ -80,10 +76,10 @@ export default class FileReceiver extends Nanobus {
     this.downloadRequest = await downloadFile(
       this.fileInfo.id,
       this.keychain,
-      p => {
+      (p) => {
         this.progress = [p, this.fileInfo.size];
         this.emit('progress');
-      }
+      },
     );
     try {
       const ciphertext = await this.downloadRequest.result;
@@ -103,7 +99,7 @@ export default class FileReceiver extends Nanobus {
         await saveFile({
           plaintext,
           name: decodeURIComponent(this.fileInfo.name),
-          type: this.fileInfo.type
+          type: this.fileInfo.type,
         });
       }
       this.msg = 'downloadFinish';
@@ -117,7 +113,7 @@ export default class FileReceiver extends Nanobus {
 
   async downloadStream(noSave = false) {
     const start = Date.now();
-    const onprogress = p => {
+    const onprogress = (p) => {
       this.progress = [p, this.fileInfo.size];
       this.emit('progress');
     };
@@ -125,7 +121,7 @@ export default class FileReceiver extends Nanobus {
     this.downloadRequest = {
       cancel: () => {
         this.sendMessageToSw({ request: 'cancel', id: this.fileInfo.id });
-      }
+      },
     };
 
     try {
@@ -143,7 +139,7 @@ export default class FileReceiver extends Nanobus {
         url: this.fileInfo.url,
         size: this.fileInfo.size,
         nonce: this.keychain.nonce,
-        noSave
+        noSave,
       };
       await this.sendMessageToSw(info);
 
@@ -171,7 +167,7 @@ export default class FileReceiver extends Nanobus {
       while (prog < this.fileInfo.size) {
         const msg = await this.sendMessageToSw({
           request: 'progress',
-          id: this.fileInfo.id
+          id: this.fileInfo.id,
         });
         if (msg.progress === prog) {
           hangs++;
@@ -217,7 +213,7 @@ export default class FileReceiver extends Nanobus {
 }
 
 async function saveFile(file) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     const dataView = new DataView(file.plaintext);
     const blob = new Blob([dataView], { type: file.type });
 

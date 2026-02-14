@@ -1,9 +1,19 @@
-# [![Send](./assets/icon-64x64.png)](https://gitlab.com/timvisee/send/) Send
+# [![Send](./assets/icon-64x64.png)](https://gitlab.com/timvisee/send/) HFA Send
 
-[![Build status on GitLab CI][gitlab-ci-master-badge]][gitlab-ci-link]
-[![Latest release][release-badge]][release-link]
-[![Docker image][docker-image-badge]][docker-image-link]
-[![Project license][repo-license-badge]](LICENSE)
+Add the following to ENV for HFA branding:
+
+```
+export UI_COLOR_PRIMARY=#b52825
+export CUSTOM_FOOTER_URL="https://hfa3.org"
+export CUSTOM_FOOTER_TEXT="Hansine Fisher & Associates"
+export UI_CUSTOM_ASSETS_ICON="hfa_icon.svg"
+export UI_CUSTOM_ASSETS_WORDMARK="hfa_wordmark.svg"
+```
+
+Notes:
+- This seems to run fine on Node 20 even though it specs Node 16
+
+---
 
 [docker-image-badge]: https://img.shields.io/badge/docker-latest-blue.svg
 [docker-image-link]: https://gitlab.com/timvisee/send/container_registry/eyJuYW1lIjoidGltdmlzZWUvc2VuZCIsInRhZ3NfcGF0aCI6Ii90aW12aXNlZS9zZW5kL3JlZ2lzdHJ5L3JlcG9zaXRvcnkvMTQxODUwNC90YWdzP2Zvcm1hdD1qc29uIiwiaWQiOjE0MTg1MDQsImNsZWFudXBfcG9saWN5X3N0YXJ0ZWRfYXQiOm51bGx9
