@@ -12,8 +12,6 @@ class DB {
     let Storage = null;
     if (config.s3_bucket) {
       Storage = require('./s3');
-    } else if (config.gcs_bucket) {
-      Storage = require('./gcs');
     } else {
       Storage = require('./fs');
     }
@@ -22,7 +20,7 @@ class DB {
     this.storage = new Storage(config, this.log);
 
     this.redis = createRedisClient(config);
-    this.redis.on('error', err => {
+    this.redis.on('error', (err) => {
       this.log.error('Redis:', err);
     });
   }
