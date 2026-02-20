@@ -9,7 +9,7 @@ import surveyDialog from './ui/surveyDialog';
 import { bytes, locale } from './utils';
 import { copyToClipboard, delay, openLinksInNewTab, percent } from './utils';
 
-export default function(state, emitter) {
+export default function (state, emitter) {
   let lastRender = 0;
   let updateTitle = false;
 
@@ -47,7 +47,7 @@ export default function(state, emitter) {
     lastRender = Date.now();
   });
 
-  emitter.on('login', email => {
+  emitter.on('login', (email) => {
     state.user.login(email);
   });
 
@@ -56,7 +56,7 @@ export default function(state, emitter) {
     emitter.emit('pushState', '/');
   });
 
-  emitter.on('removeUpload', file => {
+  emitter.on('removeUpload', (file) => {
     state.archive.remove(file);
     if (state.archive.numFiles === 0) {
       state.archive.clear();
@@ -64,7 +64,7 @@ export default function(state, emitter) {
     render();
   });
 
-  emitter.on('delete', async ownedFile => {
+  emitter.on('delete', async (ownedFile) => {
     try {
       state.storage.remove(ownedFile.id);
       await ownedFile.del();
@@ -88,27 +88,27 @@ export default function(state, emitter) {
       state.archive.addFiles(
         files,
         maxSize,
-        state.LIMITS.MAX_FILES_PER_ARCHIVE
+        state.LIMITS.MAX_FILES_PER_ARCHIVE,
       );
     } catch (e) {
       state.modal = okDialog(
         state.translate(e.message, {
           size: bytes(maxSize),
-          count: state.LIMITS.MAX_FILES_PER_ARCHIVE
-        })
+          count: state.LIMITS.MAX_FILES_PER_ARCHIVE,
+        }),
       );
     }
     render();
   });
 
-  emitter.on('signup-cta', source => {
+  emitter.on('signup-cta', (source) => {
     const query = state.query;
     state.user.startAuthFlow(source, {
       campaign: query.utm_campaign,
       content: query.utm_content,
       medium: query.utm_medium,
       source: query.utm_source,
-      term: query.utm_term
+      term: query.utm_term,
     });
     state.modal = signupDialog();
     render();
@@ -129,8 +129,8 @@ export default function(state, emitter) {
     if (state.storage.files.length >= state.LIMITS.MAX_ARCHIVES_PER_USER) {
       state.modal = okDialog(
         state.translate('tooManyArchives', {
-          count: state.LIMITS.MAX_ARCHIVES_PER_USER
-        })
+          count: state.LIMITS.MAX_ARCHIVES_PER_USER,
+        }),
       );
       return render();
     }
@@ -156,12 +156,12 @@ export default function(state, emitter) {
       if (archive.password) {
         emitter.emit('password', {
           password: archive.password,
-          file: ownedFile
+          file: ownedFile,
         });
       }
       state.modal = state.capabilities.share
-        ? shareDialog(ownedFile.name, ownedFile.url)
-        : copyDialog(ownedFile.name, ownedFile.url);
+        ? shareDialog(ownedFile.name, ownedFile.url, ownedFile.password)
+        : copyDialog(ownedFile.name, ownedFile.url, ownedFile.password);
     } catch (err) {
       if (err.message === '0') {
         //cancelled. do nothing
@@ -175,7 +175,7 @@ export default function(state, emitter) {
       } else {
         // eslint-disable-next-line no-console
         console.error(err);
-        state.sentry.withScope(scope => {
+        state.sentry.withScope((scope) => {
           scope.setExtra('duration', err.duration);
           scope.setExtra('size', err.size);
           state.sentry.captureException(err);
@@ -238,7 +238,7 @@ export default function(state, emitter) {
     const links = openLinksInNewTab();
     try {
       const dl = state.transfer.download({
-        stream: state.capabilities.streamDownload
+        stream: state.capabilities.streamDownload,
       });
       render();
       await dl;
@@ -254,7 +254,7 @@ export default function(state, emitter) {
         state.transfer = null;
         const location = err.message === '404' ? '/404' : '/error';
         if (location === '/error') {
-          state.sentry.withScope(scope => {
+          state.sentry.withScope((scope) => {
             scope.setExtra('duration', err.duration);
             scope.setExtra('size', err.size);
             scope.setExtra('progress', err.progress);
@@ -288,12 +288,15 @@ export default function(state, emitter) {
     render();
   });
 
-  setInterval(() => {
-    // poll for updates of the upload list
-    if (!state.modal && state.route === '/') {
-      checkFiles();
-    }
-  }, 2 * 60 * 1000);
+  setInterval(
+    () => {
+      // poll for updates of the upload list
+      if (!state.modal && state.route === '/') {
+        checkFiles();
+      }
+    },
+    2 * 60 * 1000,
+  );
 
   setInterval(() => {
     // poll for rerendering the file list countdown timers
