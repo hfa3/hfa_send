@@ -14,16 +14,6 @@ class Footer extends Component {
   createElement() {
     const translate = this.state.translate;
 
-    // Add additional links from configuration if available
-    var links = [];
-    links.push(html`
-      <li class="m-2">
-        <a href="https://gitlab.com/timvisee/send" target="_blank">
-          ${translate('footerLinkSource')}
-        </a>
-      </li>
-    `);
-
     // Defining a custom footer
     var footer = [];
     if (this.state != undefined && this.state.WEB_UI != undefined) {
@@ -60,11 +50,6 @@ class Footer extends Component {
           class="flex flex-col md:flex-row items-start md:items-center md:justify-start"
         >
           ${footer}
-        </ul>
-        <ul
-          class="flex flex-col md:flex-row items-start md:items-center md:justify-end"
-        >
-          ${links}
         </ul>
       </footer>
     `;
