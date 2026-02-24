@@ -29,7 +29,7 @@ class Header extends Component {
         wordmark:
           this.state.WEB_UI.CUSTOM_ASSETS.wordmark !== ''
             ? this.state.WEB_UI.CUSTOM_ASSETS.wordmark
-            : assets.get('wordmark.svg') + '#logo'
+            : assets.get('wordmark.svg') + '#logo',
       };
     const title =
       platform() === 'android'
@@ -37,7 +37,10 @@ class Header extends Component {
             <a class="flex flex-row items-center">
               <img src="${assetMap.icon}" />
               <svg class="w-48">
-                <use xlink:href="${assetMap.wordmark}" />
+                <use
+                  href="${assetMap.wordmark}"
+                  xlink:href="${assetMap.wordmark}"
+                />
               </svg>
             </a>
           `
@@ -47,8 +50,8 @@ class Header extends Component {
                 alt="${this.state.translate('title')}"
                 src="${assetMap.icon}"
               />
-              <svg viewBox="66 0 340 64" class="w-48 md:w-64">
-                <use xlink:href="${assetMap.wordmark}" />
+              <svg viewBox="0 0 340 64" class="pl-4 pr-10 w-48 md:w-64">
+                <use href="${assetMap.wordmark}" xlink:href="${assetMap.wordmark}" /></use>
               </svg>
             </a>
           `;
