@@ -41,20 +41,7 @@ module.exports = function (name, url, password) {
         >
           ${state.translate('copyLinkButton')}
         </button>
-        <p
-          class="pt-6 font-normal leading-normal text-grey-80 word-break-all dark:text-grey-40"
-        >
-          This password is required to unlock the download:
-        </p>
-        <div class="flex flex-row items-center justify-center w-full">
-          <input
-            type="text"
-            id="share-password"
-            class="block w-full my-4 border-default rounded-lg leading-loose h-12 px-2 py-1 dark:bg-grey-80"
-            value="${password}"
-            readonly="true"
-          />
-        </div>
+        ${showPasswordInfo(password)}
         <button
           class="link-primary my-4 font-medium cursor-pointer focus:outline"
           onclick="${close}"
@@ -83,6 +70,27 @@ module.exports = function (name, url, password) {
       copyToClipboard(url);
       event.target.textContent = state.translate('copiedUrl');
       setTimeout(close, 1000);
+    }
+
+    function showPasswordInfo(password) {
+      if (password !== undefined)
+        return html`
+          <p
+            class="pt-6 font-normal leading-normal text-grey-80 word-break-all dark:text-grey-40"
+          >
+            This password is required to unlock the download:
+          </p>
+          <div class="flex flex-row items-center justify-center w-full">
+            <input
+              type="text"
+              id="share-password"
+              class="block w-full my-4 border-default rounded-lg leading-loose h-12 px-2 py-1 dark:bg-grey-80"
+              value="${password}"
+              readonly="true"
+            />
+          </div>
+        `;
+      else return;
     }
   };
   dialog.type = 'copy';
