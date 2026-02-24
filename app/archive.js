@@ -24,11 +24,13 @@ export default class Archive {
   }
 
   get name() {
-    return this.files.length > 1 ? 'Send-Archive.zip' : this.files[0].name;
+    return this.files.length > 1
+      ? 'Filesharing-Archive.zip'
+      : this.files[0].name;
   }
 
   get type() {
-    return this.files.length > 1 ? 'send-archive' : this.files[0].type;
+    return this.files.length > 1 ? 'filesharing-archive' : this.files[0].type;
   }
 
   get size() {
@@ -41,16 +43,16 @@ export default class Archive {
 
   get manifest() {
     return {
-      files: this.files.map(file => ({
+      files: this.files.map((file) => ({
         name: file.name,
         size: file.size,
-        type: file.type
-      }))
+        type: file.type,
+      })),
     };
   }
 
   get stream() {
-    return concatStream(this.files.map(file => blobStream(file)));
+    return concatStream(this.files.map((file) => blobStream(file)));
   }
 
   addFiles(files, maxSize, maxFiles) {
@@ -58,7 +60,7 @@ export default class Archive {
       throw new Error('tooManyFiles');
     }
     const newFiles = files.filter(
-      file => file.size > 0 && !isDupe(file, this.files)
+      (file) => file.size > 0 && !isDupe(file, this.files),
     );
     const newSize = newFiles.reduce((total, file) => total + file.size, 0);
     if (this.size + newSize > maxSize) {
