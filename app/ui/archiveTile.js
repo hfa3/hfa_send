@@ -44,7 +44,7 @@ function password(state) {
         <input
           id="add-password"
           type="checkbox"
-          ${state.archive.password ? 'checked' : ''}
+          checked="checked"
           autocomplete="off"
           onchange="${togglePasswordInput}"
         />
@@ -53,9 +53,7 @@ function password(state) {
       <div class="relative inline-block my-1">
         <input
           id="password-input"
-          class="${state.archive.password
-            ? ''
-            : 'invisible'} border-default rounded-default focus:border-primary leading-normal my-1 py-1 px-2 h-8 dark:bg-grey-80"
+          class="border-default rounded-default focus:border-primary leading-normal my-1 py-1 px-2 h-8 dark:bg-grey-80"
           autocomplete="off"
           maxlength="${MAX_LENGTH}"
           type="text"
@@ -81,6 +79,7 @@ function password(state) {
     if (checked) {
       input.classList.remove('invisible');
       state.archive.password = generatedPassword;
+      input.value = generatedPassword;
     } else {
       input.classList.add('invisible');
       input.value = '';
