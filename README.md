@@ -4,10 +4,15 @@ Add the following to ENV for HFA branding:
 
 ```
 export UI_COLOR_PRIMARY=#b52825
+export CUSTOM_TITLE="HFA Filesharing"
 export CUSTOM_FOOTER_URL="https://hfa3.org"
 export CUSTOM_FOOTER_TEXT="Hansine Fisher & Associates"
 export UI_CUSTOM_ASSETS_ICON="hfa_icon.svg"
 export UI_CUSTOM_ASSETS_WORDMARK="hfa_wordmark.svg"
+export UI_CUSTOM_ASSETS_FAVICON_32PX="hfa_mark.png"
+export UI_CUSTOM_ASSETS_FAVICON_16PX="hfa_mark.png"
+export UI_CUSTOM_ASSETS_APPLE_TOUCH_ICON="hfa_mark.png"
+export UI_CUSTOM_ASSETS_SAFARI_PINNED_TAB="hfa_mark.png"
 ```
 
 Notes:
