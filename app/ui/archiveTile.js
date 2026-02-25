@@ -31,6 +31,7 @@ function expiryInfo(translate, archive) {
 
 function password(state) {
   const MAX_LENGTH = 4096;
+  state.archive.password = generatedPassword;
 
   return html`
     <div class="mb-2 px-1">
