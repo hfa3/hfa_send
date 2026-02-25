@@ -6,10 +6,10 @@ const modal = require('./modal');
 const intro = require('./intro');
 const assets = require('../../common/assets');
 
-module.exports = function(state, emit) {
+module.exports = function (state, emit) {
   const archives = state.storage.files
-    .filter(archive => !archive.expired)
-    .map(archive => archiveTile(state, emit, archive));
+    .filter((archive) => !archive.expired)
+    .map((archive) => archiveTile(state, emit, archive));
   let left = '';
   if (state.uploading) {
     left = archiveTile.uploading(state, emit);
@@ -57,7 +57,12 @@ module.exports = function(state, emit) {
   const right =
     archives.length === 0
       ? intro(state)
-      : list(archives, 'p-2 h-full overflow-y-auto w-full', 'mb-4 w-full');
+      : html`
+          <h2 class="text-2xl font-bold p-2 md:pb-2">
+            Your Recently Uploaded Files
+          </h2>
+          ${list(archives, 'p-2 h-full overflow-y-auto w-full', 'mb-4 w-full')}
+        `;
 
   return html`
     <main class="main">
