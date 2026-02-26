@@ -1,8 +1,9 @@
-# [![Send](./assets/icon-64x64.png)](https://gitlab.com/timvisee/send/) HFA Send
+# HFA Filesharing
 
-Add the following to ENV for HFA branding:
+Add the following to ENV for HFA branding and configuration:
 
 ```
+export DEFAULT_EXPIRE_SECONDS=604800
 export UI_COLOR_PRIMARY=#b52825
 export CUSTOM_TITLE="HFA Filesharing"
 export CUSTOM_FOOTER_URL="https://hfa3.org"
@@ -16,7 +17,7 @@ export UI_CUSTOM_ASSETS_SAFARI_PINNED_TAB="hfa_mark.png"
 ```
 
 Notes:
-- This seems to run fine on Node 20 even though it specs Node 16
+- This seems to run fine on Node 20 (in development) even though it specs Node 16. Trying to run in production on node 20 caused misc issues.
 
 ---
 
