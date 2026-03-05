@@ -30,9 +30,9 @@
     "test:report": "nyc report --reporter=html",
     "test-integration": "cross-env NODE_ENV=development wdio test/wdio.docker.conf.js",
     "circleci-test-integration": "echo 'webdriverio tests need to be updated to node 12'",
-    "start": "npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack serve --mode=development",
+    "start": "dotenvx run -- npm run clean && cross-env NODE_ENV=development L10N_DEV=true BASE_URL=http://localhost:8080 DETECT_BASE_URL=true webpack serve --mode=development",
     "android": "cross-env ANDROID=1 npm start",
-    "prod": "node server/bin/prod.js",
+    "prod": "dotenvx run -f .env.production -- node server/bin/prod.js",
     "knip": "knip"
   },
   "husky": {
@@ -130,6 +130,7 @@
   },
   "dependencies": {
     "@dannycoates/express-ws": "^5.0.3",
+    "@dotenvx/dotenvx": "^1.52.0",
     "@fluent/bundle": "^0.17.1",
     "@fluent/langneg": "^0.6.2",
     "@sentry/node": "^7.7.0",
