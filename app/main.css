@@ -42,14 +42,46 @@ body {
   @apply py-4;
   @apply px-6;
   @apply font-semibold;
-}
 
-.btn:hover {
-  @apply bg-primary_accent;
+  &:hover {
+    @apply bg-primary_accent;
+  }
+
+  &.reversed {
+    @apply bg-transparent;
+    @apply text-primary;
+
+    border: 1px solid var(--color-primary);
+
+    &:hover {
+      @apply bg-primary;
+      @apply text-white;
+    }
+  }
+
+  &.icon-btn {
+    @apply py-3;
+    @apply px-4;
+  }
 }
 
 .btn:focus {
   @apply bg-primary_accent;
+}
+
+.alert {
+  top: 100px;
+  padding: 1.25rem;
+  position: fixed;
+  border-radius: 1rem;
+
+  --tw-translate-x: -50%;
+
+  &.success {
+    background-color: rgb(209 231 221);
+    border: 1px solid rgb(163 207 187);
+    color: rgb(10 54 34);
+  }
 }
 
 .checkbox {
@@ -214,7 +246,8 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
   /* stylelint-disable */
-  background-image: -webkit-linear-gradient(
+  background-image:
+    -webkit-linear-gradient(
       -45deg,
       transparent 20%,
       rgb(255 255 255 / 40%) 20%,
@@ -228,12 +261,16 @@ progress::-webkit-progress-value {
     -webkit-linear-gradient(left, var(--color-primary), var(--color-primary));
   /* stylelint-enable */
   border-radius: 2px;
-  background-size: 21px 20px, 100% 100%, 100% 100%;
+  background-size:
+    21px 20px,
+    100% 100%,
+    100% 100%;
 }
 
 progress::-moz-progress-bar {
   /* stylelint-disable */
-  background-image: -moz-linear-gradient(
+  background-image:
+    -moz-linear-gradient(
       135deg,
       transparent 20%,
       rgb(255 255 255 / 40%) 20%,
@@ -247,7 +284,10 @@ progress::-moz-progress-bar {
     -moz-linear-gradient(left, var(--color-primary), var(--color-primary));
   /* stylelint-enable */
   border-radius: 2px;
-  background-size: 21px 20px, 100% 100%, 100% 100%;
+  background-size:
+    21px 20px,
+    100% 100%,
+    100% 100%;
   animation: animate-stripes 1s linear infinite;
 }
 
@@ -333,8 +373,10 @@ select {
   }
 
   .shadow-big {
-    box-shadow: 0 12px 18px 2px rgb(34 0 51 / 4%),
-      0 6px 22px 4px rgb(7 48 114 / 12%), 0 6px 10px -4px rgb(14 13 26 / 12%);
+    box-shadow:
+      0 12px 18px 2px rgb(34 0 51 / 4%),
+      0 6px 22px 4px rgb(7 48 114 / 12%),
+      0 6px 10px -4px rgb(14 13 26 / 12%);
   }
 }
 
