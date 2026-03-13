@@ -30,7 +30,7 @@ export default class Archive {
   }
 
   get type() {
-    return this.files.length > 1 ? 'filesharing-archive' : this.files[0].type;
+    return this.files.length > 1 ? 'send-archive' : this.files[0].type;
   }
 
   get size() {
